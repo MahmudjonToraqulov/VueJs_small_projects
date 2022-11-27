@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Rahul Anand Singh's Book App</title>
+</head>
+<body>
+    <div id="app" class="header_section" >
+        <!-- Information about myself  - Rahul Anand Singh-->
+        <div class="personal_information">
+            <p>Name: </p>
+            <p>Class number: </p>
+            <p>Section number: </p>
+            <p>Date: 26.11.2022 </p>
+        </div>
+        
+        <!-- Header section's header title  - Rahul Anand Singh-->
+        <h2 class="header_text">Rahul Anand Singh's Book App</h2>
+
+
+          
+        
+        <!-- Header form for a book  - Rahul Anand Singh-->
+        <form class="book_form" @submit="submitForm">
+            <div class="form_box">
+                <label for="#title">Book's Title</label><br>
+                <input id="title" type="text" v-model="formValues.title">
+            </div>
+            <div class="form_box">
+                <label for="#author">Book's Author</label><br>
+                <input id="author" type="text" v-model="formValues.author">
+            </div>
+            <div class="form_box">
+                <label for="#subject">Book's Subject</label><br>
+                <input id="subject" type="text" v-model="formValues.subject">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Book Items  - Rahul Anand Singh-->
+        <div class="result_container" > 
+            <li class="book_item" v-for="todo in todos">{{ todo }}</li> 
+        </div>
+    </div>
+    
+    
+
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let app = Vue.createApp({
+            data: function () {
+                return {
+                    formValues:{
+                        title: '',
+                        author: '',
+                        subject: '',
+                    },
+                    todos: [],
+                    error: '',
+                    num: 1
+                }
+            },
+            methods:{
+                submitForm(event){ 
+                    event.preventDefault()
+                    this.todos = []
+                    if(this.formValues.title === "" || this.formValues.author === "" || this.formValues.subject === "" ){
+                        return
+                    }  
+                    this.todos.push(" Book's title is :" + this.formValues.title)
+                    this.todos.push(" Book's author is :" + this.formValues.author)
+                    this.todos.push(" Book's subject is :" + this.formValues.subject )
+                    this.formValues.title = ''
+                    this.formValues.author = ''
+                    this.formValues.subject = ''  
+                    num++
+                    
+                }
+            }
+        })
+
+        app.mount("#app")
+    </script>
+</body>
+</html>

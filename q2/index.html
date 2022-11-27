@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>Rahul Anand Singh's Distance Conversion Application</title>
+</head>
+<body>
+    <div id="app" class="header_section" >
+        <!-- Information about myself -> Rahul Anand Singh -->
+        <div class="personal_information">
+            <p>Name: </p>
+            <p>Class number: </p>
+            <p>Section number: </p>
+            <p>Date: 26.11.2022 </p>
+        </div>
+        
+        <!-- Header section's title -> Rahul Anand Singh-->
+        <h2 class="header_text">Rahul Anand Singhs Distance Conversion Application</h2>
+
+
+          
+        
+        <!-- Header form for a book -> Rahul Anand Singh-->
+        <form class="book_form" >
+            <div class="form_box">
+                <label for="#title">Enter Distance</label><br>
+                <h2 class="error_text" > {{ error }}</h2>
+                <h2 class="warning_text"> {{ warning }}</h2>
+                <input id="title"  v-on:input="onChange_dis($event)"  type="text" >
+            </div>
+            <div class="form_box">
+                <label class="selector_text" >1 - Conversion</label>
+                <select class="selector" @change="onChange($event)"  v-model="first_conversion">
+                    <option  value=""> ---- </option>
+                    <option value="centimeters">centimeters</option>  
+                    <option value="meters">meters</option>
+                    <option value="kilometers">kilometers</option>
+                    <option value="inches">inches</option>
+                    <option value="feet">feet</option>
+                    <option value="miles">miles</option> 
+                </select>
+            </div> 
+            <div class="form_box">
+                <label class="selector_text">2 - Conversion</label>
+                <select class="selector" @change="onChange($event)"  v-model="second_conversion" >
+                    <option  value=""> ---- </option>
+                    <option value="centimeters_2">centimeters</option> -->
+                    <option value="meters_2">meters</option>
+                    <option value="kilometers_2">kilometers</option>
+                    <option value="inches_2">inches</option>
+                    <option value="feet_2">feet</option>
+                    <option value="miles_2">miles</option>
+                </select>
+            </div> 
+        </form> 
+
+        <!-- Distance Conversion Result -> Rahul Anand Singh-->
+        <div class="result_container" > 
+            <h2 class="result"> {{ result }} </h2>
+        </div>
+    </div>
+    
+    
+
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let app = Vue.createApp({
+            data: function () {
+                return {
+                    distance: 0,
+                    result: 0,
+                    error: '',
+                    warning: '',
+                    first_conversion: '',
+                    second_conversion: '',
+                    miles: 160934,
+                    cm: 1,
+                    km: 100000,
+                    feet: 30.48,
+                    inches: 2.54,
+                    meters: 100,   
+                }
+            },
+            methods:{
+                onChange_dis(e){  
+                    e.preventDefault()
+                    this.distance = Number(e.target.value)
+                    console.log(typeof this.distance);
+                    if(e.target.value === ""){
+                        this.warning = 'Enter a distance to convert'
+                        this.result = 0
+                    }
+                    else{
+                        this.warning = ""
+                    }
+
+                    if(Number(e.target.value) === NaN ){
+                        this.error = "Invalid input"
+                    } 
+
+                },
+                onChange(){ 
+                    if(this.first_conversion !== "" && this.second_conversion !== ""){
+                        if (this.first_conversion === "centimeters") {
+                            if(this.second_conversion === "centimeters_2"){
+                                console.log("asdasd");
+                                this.result = this.cm / this.cm
+                                return
+                            }
+                            else if(this.second_conversion === "meters_2" ){
+                                this.result = this.distance / this.meters
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "kilometers_2" ){
+                                this.result = this.distance / this.km
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "inches_2" ){
+                                this.result = this.distance / this.inches
+                                return
+                            }
+                            else if(this.second_conversion === "feet_2" ){
+                                this.result = this.distance / this.feet
+                                return
+                            }
+                            else if(this.second_conversion === "in" ){
+                                this.result = this.distance / this.inches
+                                return
+                            }
+                            else if(this.second_conversion === "miles_2" ){
+                                this.result = this.distance / 160934
+                                return
+                            }
+                            return
+                        }
+                        
+
+                        else if (this.first_conversion === "meters") {
+                            if(this.second_conversion === "centimeters_2"){
+                                this.result = this.distance   * 100
+                                return
+                            }
+                            else if(this.second_conversion === "meters_2" ){
+                                this.result = 1
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "kilometers_2" ){
+                                this.result = this.distance / this.km * 100
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "inches_2" ){
+                                this.result = this.distance / this.inches * 100
+                                return
+                            }
+                            else if(this.second_conversion === "feet_2" ){
+                                this.result = this.distance / this.feet * 100
+                                return
+                            } 
+                            else if(this.second_conversion === "miles_2" ){
+                                this.result = this.distance / 160934 * 100
+                                return
+                            }
+                        }
+
+                        else if (this.first_conversion === "kilometers") {
+                            if(this.second_conversion === "centimeters_2"){
+                                console.log("asdasd");
+                                this.result = this.distance  / this.cm * 10000
+                                return
+                            }
+                            else if(this.second_conversion === "meters_2" ){
+                                this.result = this.distance / this.meters * 10000
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "kilometers_2" ){
+                                this.result = 1
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "inches_2" ){
+                                this.result = this.distance / this.inches * 10000
+                                return
+                            }
+                            else if(this.second_conversion === "feet_2" ){
+                                this.result = this.distance / 30.48 * 10000
+                                return
+                            }
+                            else if(this.second_conversion === "in" ){
+                                this.result = this.distance / this.inches * 10000
+                                return
+                            }
+                            else if(this.second_conversion === "miles_2" ){
+                                this.result = this.distance / 160934 * 10000
+                                return
+                            }
+                            return
+                        }
+
+
+                        
+
+                        else if (this.first_conversion === "inches") {
+                            if(this.second_conversion === "centimeters_2"){
+                                console.log("asdasd");
+                                this.result = this.distance  / this.cm * 2.54
+                                return
+                            }
+                            else if(this.second_conversion === "meters_2" ){
+                                this.result = this.distance / this.meters * 2.54
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "kilometers_2" ){
+                                this.result = this.distance / this.km * 2.54
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "inches_2" ){
+                                this.result = 1
+                                return
+                            }
+                            else if(this.second_conversion === "feet_2" ){
+                                this.result = this.distance / this.feet * 2.54
+                                return
+                            }
+                            else if(this.second_conversion === "in" ){
+                                this.result = this.distance / this.inches * 2.54
+                                return
+                            }
+                            else if(this.second_conversion === "miles_2" ){
+                                this.result = this.distance / 160934 * 2.54
+                                return
+                            }
+                            return
+                        }
+
+
+                        else if (this.first_conversion === "feet") {
+                            if(this.second_conversion === "centimeters_2"){
+                                console.log("asdasd");
+                                this.result = this.distance  / this.cm * 30.48
+                                return
+                            }
+                            else if(this.second_conversion === "meters_2" ){
+                                this.result = this.distance / this.meters * 30.48
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "kilometers_2" ){
+                                this.result = this.distance / this.km * 30.48
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "inches_2" ){
+                                this.result = this.distance / this.inches * 30.48
+                                return
+                            }
+                            else if(this.second_conversion === "feet_2" ){
+                                this.result = 1
+                                return
+                            }
+                            else if(this.second_conversion === "in" ){
+                                this.result = this.distance / this.inches * 30.48
+                                return
+                            }
+                            else if(this.second_conversion === "miles_2" ){
+                                this.result = this.distance / 160934 * 30.48
+                                return
+                            }
+                            return
+                        }
+
+
+                        
+                        else if (this.first_conversion === "miles") {
+                            if(this.second_conversion === "centimeters_2"){
+                                console.log("asdasd");
+                                this.result = this.distance  / this.cm * 160934
+                                return
+                            }
+                            else if(this.second_conversion === "meters_2" ){
+                                this.result = this.distance / this.meters * 160934
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "kilometers_2" ){
+                                this.result = this.distance / this.km * 160934
+                                
+                                return
+                            }
+                            else if(this.second_conversion === "inches_2" ){
+                                this.result = this.distance / this.inches * 160934
+                                return
+                            }
+                            else if(this.second_conversion === "feet_2" ){
+                                this.result = this.distance / this.feet * 160934
+                                return
+                            }
+                            else if(this.second_conversion === "in" ){
+                                this.result = this.distance / this.inches * 160934
+                                return
+                            }
+                            else if(this.second_conversion === "miles_2" ){
+                                this.result = 1
+                                return
+                            }
+                            return
+                        }
+
+                    }
+                    return
+                }
+            }
+        })
+
+        app.mount("#app")
+    </script>
+</body>
+</html>
